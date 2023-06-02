@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Progress Bar</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateProgressBar() {
+          $.get('/progress', function(response) {
+            var progress = response.progress;
+            $('#progress-bar').css('width', progress + '%').attr('aria-valuenow', progress);  // update the progress bar
+            if (progress < 100) {
+              setTimeout(updateProgressBar, 1000);  // continue updating every 1 second
+            }
+          });
+        }
+        
+        $(document).ready(function() {
+          updateProgressBar();  // start updating the progress bar
+        });
+    </script>
+</head>
+<body>
+    <div class="progress">
+        <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="background-color: #28a745; height: 20px;"></div>
+    </div>
+</body>
+</html>

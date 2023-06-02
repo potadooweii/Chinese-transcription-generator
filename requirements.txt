@@ -1,0 +1,17 @@
+# Frontend
+streamlit==1.23.1
+streamlit-server-state==0.16.0
+streamlit-autorefresh==0.0.1
+
+# Backend
+pydantic==1.10.8
+APScheduler==3.10.1
+
+# Diarizer
+Cython==0.29.35
+wget==3.2
+nemo_toolkit[asr]==1.17.0
+
+# Transcriptor
+chardet==5.1.0
+git+https://github.com/m-bain/whisperx.git@93ed6cfa93ffdce04ae0d125aa4d645cc6b9ea77
