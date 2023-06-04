@@ -13,16 +13,16 @@ from omegaconf import OmegaConf
 class Diarizer:
     def __init__(self, work_dir: str):
         self.work_dir = os.path.join(work_dir, "diarization")
-        os.makedirs(self.work_dir)
+        if not os.path.exists(self.work_dir):
+            os.makedirs(self.work_dir)
 
-    def diarize(self, audio_path: str):
+    def diarize(self, audio_path: str)->list:
+        if not os.path.exists(audio_path):
+            return []
         audio_path = self._audio_to_mono(audio_path)
         msdd_model = NeuralDiarizer(cfg=self._create_config(audio_path))
         msdd_model.diarize()
-
-        gc.collect()
-        cuda.empty_cache()
-        del msdd_model
+        gc.collect(); cuda.empty_cache(); del msdd_model
         return self._get_speaker_timestamp()
 
     def _audio_to_mono(self, audio_path: str):

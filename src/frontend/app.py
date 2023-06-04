@@ -13,9 +13,14 @@ from backend.transcription.transcription_manager import TranscriptionManager
 def run_transcription(
     audio: str, whisper_model_args: dict = {}, diarization: bool = True
 ):
-    transcription_manager = TranscriptionManager()
-    transcription_manager.run(audio, whisper_model_args, diarization)
-
+    try:
+        transcription_manager = TranscriptionManager()
+        transcription_manager.run(audio, whisper_model_args, diarization)
+    except Exception as e:
+        print(e)
+        st.warning(e)
+    
+    # check if there is queued job.
     if len(server_state.job_queue) > 0:
         next_audio = server_state.job_queue.pop()
         start_a_transcribing_task(next_audio)
@@ -46,7 +51,7 @@ def nothing_running_view():
 
 def something_running_view():
     st.write(f"{server_state.running_file} is being transcribed...")
-    progress_bar = st.progress(server_state.progress)
+    # progress_bar = st.progress(server_state.progress) # TODO
 
     st.subheader("Job queue:")
     for i, job in enumerate(server_state.job_queue):
