@@ -1,0 +1,11 @@
+.PHONY: run test rm-pycache
+
+run:
+	streamlit run src/frontend/app.py
+
+test:
+	coverage run -m pytest
+	coverage report
+
+rm-pycache:
+	find . | grep -E "(/__pycache__$|\.pyc$|\.pyo$)" | xargs rm -rf
