@@ -18,6 +18,7 @@ class FileManager:
 
     @staticmethod
     def write_result_to_download(result: list[dict], file_name: str, diarization: bool = True):
+        file_name = '-'.join(file_name.split('.')[:-1])
         file_path = os.path.join(SERVICE_ENV.DOWNLOAD_DIR, file_name+'.txt')
         with open(file_path, 'w') as f:
             for segment in result:

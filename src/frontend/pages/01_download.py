@@ -22,7 +22,12 @@ def main():
             st.write(filename)
         with cols[1]:
             with open(file_path) as f:
-                st.download_button("download", f, key="download" + filename)
+                st.download_button(
+                    "download",
+                    f,
+                    file_name=filename,
+                    key="download" + filename
+                )
         with cols[2]:
             if st.button("delete", key="delete" + filename):
                 FileManager.delete_file(file_path)
