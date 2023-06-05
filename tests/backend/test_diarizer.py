@@ -7,9 +7,7 @@ import shutil
 
 
 class TestDiarizer(unittest.TestCase):
-
     def test_init(self):
-        
         with self.subTest("Absent work_dir"):
             work_dir = "tests/a_test_case/"
             diarizer = Diarizer(work_dir)
@@ -23,7 +21,7 @@ class TestDiarizer(unittest.TestCase):
     def test_diarization(self):
         work_dir = "tests/a_test_case/"
         diarizer = Diarizer(work_dir)
-        
+
         with self.subTest("Diarize"):
             audio_path = "tests/testsets/audio/no_audio.m4a"
             ret = diarizer.diarize(audio_path)
