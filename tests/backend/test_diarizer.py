@@ -18,11 +18,11 @@ class TestDiarizer(unittest.TestCase):
         # cleanup
         shutil.rmtree(work_dir)
 
-    def test_diarization(self):
+    def test_diarize(self):
         work_dir = "tests/a_test_case/"
         diarizer = Diarizer(work_dir)
 
-        with self.subTest("Diarize"):
+        with self.subTest("File not exists"):
             audio_path = "tests/testsets/audio/no_audio.m4a"
             ret = diarizer.diarize(audio_path)
             self.assertListEqual(ret, [])

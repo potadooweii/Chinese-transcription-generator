@@ -30,7 +30,7 @@ class Transcriptor:
             audio,
             batch_size=model_args.batch_size,
         )
-        gc.collect(); cuda.empty_cache(); del whisper_model
+        del whisper_model; cuda.empty_cache(); gc.collect()
 
         # align
         align_model, metadata = whisperx.load_align_model(
@@ -44,7 +44,7 @@ class Transcriptor:
             model_args.device,
             return_char_alignments=False,
         )
-        gc.collect(); cuda.empty_cache(); del align_model
+        del align_model; cuda.empty_cache(); gc.collect()
 
         return ret
 
@@ -55,7 +55,7 @@ class Transcriptor:
             device = model_args.device
             device_index = 0
         return whisperx.load_model(
-            "tiny",
+            model_args.model_size,
             device,
             device_index=int(device_index),
             compute_type=model_args.compute_type,

@@ -10,7 +10,7 @@ class TestTranscriptionManager(unittest.TestCase):
         # setup
         transcription_manager = TranscriptionManager()
         audio_path = "tests/testsets/audio/test.m4a"
-        audio_name = "test.m4a"
+        audio_name = audio_path.split('/')[-1]
         with open(audio_path, "rb") as f:
             audio = f.read()
             transcription_manager._file_manager.save_audio(audio_name, audio)
